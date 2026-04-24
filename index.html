@@ -10,19 +10,29 @@
 
 <h1>Image Gallery</h1>
 
-<div class="gallery">
-  <img src="https://picsum.photos/id/1015/400/300">
-  <img src="https://picsum.photos/id/1011/400/300">
-  <img src="https://picsum.photos/id/1012/400/300">
-  <img src="https://picsum.photos/id/1013/400/300">
+<!-- FILTER BUTTONS -->
+<div class="filters">
+  <button onclick="filterImages('all')">All</button>
+  <button onclick="filterImages('nature')">Nature</button>
+  <button onclick="filterImages('city')">City</button>
 </div>
 
-<!-- Lightbox -->
+<!-- GALLERY -->
+<div class="gallery">
+  <img src="https://picsum.photos/id/1015/400/300" data-category="nature">
+  <img src="https://picsum.photos/id/1011/400/300" data-category="nature">
+  <img src="https://picsum.photos/id/1012/400/300" data-category="city">
+  <img src="https://picsum.photos/id/1013/400/300" data-category="city">
+</div>
+
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <span class="close">&times;</span>
   <img id="lightbox-img">
-  <button onclick="prevImage()">Prev</button>
-  <button onclick="nextImage()">Next</button>
+  <div class="controls">
+    <button onclick="prevImage()">Prev</button>
+    <button onclick="nextImage()">Next</button>
+  </div>
 </div>
 
 <script src="script.js"></script>

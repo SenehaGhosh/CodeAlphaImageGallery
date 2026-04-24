@@ -1,48 +1,43 @@
-body {
-  font-family: Arial;
-  background: #111;
-  color: white;
-  text-align: center;
+const images = document.querySelectorAll(".gallery img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const closeBtn = document.querySelector(".close");
+
+let currentIndex = 0;
+
+images.forEach((img, index) => {
+  img.addEventListener("click", () => {
+    currentIndex = index;
+    showImage();
+    lightbox.style.display = "flex";
+  });
+});
+
+function showImage() {
+  lightboxImg.src = images[currentIndex].src;
 }
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 10px;
-  padding: 20px;
+function nextImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  showImage();
 }
 
-.gallery img {
-  width: 100%;
-  cursor: pointer;
-  transition: 0.3s;
+function prevImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  showImage();
 }
 
-.gallery img:hover {
-  transform: scale(1.05);
-}
+closeBtn.onclick = () => {
+  lightbox.style.display = "none";
+};
 
-/* Lightbox */
-.lightbox {
-  display: none;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.9);
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.lightbox img {
-  width: 80%;
-}
-
-.close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 30px;
-  cursor: pointer;
+/* FILTER FUNCTION */
+function filterImages(category) {
+  images.forEach(img => {
+    if (category === "all" || img.dataset.category === category) {
+      img.style.display = "block";
+    } else {
+      img.style.display = "none";
+    }
+  });
 }
